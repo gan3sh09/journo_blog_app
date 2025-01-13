@@ -26,11 +26,7 @@ class OutlineButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.bold,
-          color: AppColors.whiteColor,
-        ),
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }

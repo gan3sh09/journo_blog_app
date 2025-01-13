@@ -9,3 +9,4 @@ part 'primary_button.dart';
 part 'outline_button.dart';
 part 'custom_textform_field.dart';
 part 'custom_rich_text.dart';
+part 'no_internet_connection.dart';

@@ -65,15 +65,19 @@ class _AddPostsState extends State<AddPosts> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20.r),
-                    child:
-                        Image.asset(AppAssets.assetsImagesAddPostsPlaceholder),
+                    child: Image.asset(
+                        AppAssets.assetsImagesAddPostsImagePlaceholder),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      HugeIcons.strokeRoundedCameraLens,
-                      color: AppColors.primaryColor,
-                      size: 28,
+                  Positioned(
+                    right: 10.w,
+                    bottom: 10.h,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add_a_photo_outlined,
+                        color: AppColors.primaryColor,
+                        size: 28,
+                      ),
                     ),
                   ),
                 ],
@@ -139,24 +143,31 @@ class _AddPostsState extends State<AddPosts> {
                 ),
               ),
               20.heightBox,
+              Text(
+                'Description',
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+              3.heightBox,
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(
-                  width: 1,
-                  color: AppColors.greyColor,
-                )),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    width: 1,
+                    color: AppColors.greyColor,
+                  ),
+                ),
                 child: QuillSimpleToolbar(
                   controller: _controller,
                   configurations: const QuillSimpleToolbarConfigurations(),
                 ),
               ),
-              10.heightBox,
+              20.heightBox,
               Container(
                 padding: EdgeInsets.all(20),
                 height: 400,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Stack(
                   children: [
@@ -165,15 +176,13 @@ class _AddPostsState extends State<AddPosts> {
                     ),
                     if (isEditorEmpty)
                       IgnorePointer(
-                        child: Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Enter your text here...",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16,
-                              ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Enter your description here...",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
                             ),
                           ),
                         ),

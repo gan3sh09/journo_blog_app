@@ -26,14 +26,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      body: Center(
-        child: FadedScaleAnimation(
-          child: Image.asset(
-            AppAssets.assetsImagesLogo,
-            height: 42.h,
-            width: 139.w,
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        backgroundColor: AppColors.primaryColor,
+        body: Center(
+          child: FadedScaleAnimation(
+            child: Image.asset(
+              AppAssets.assetsImagesLogo,
+              height: 42.h,
+              width: 139.w,
+            ),
           ),
         ),
       ),

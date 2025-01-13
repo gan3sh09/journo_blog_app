@@ -26,12 +26,12 @@ class AppRouter extends RootStackRouter {
         ),
         CustomRoute(
           page: LoginRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
+          // transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
           page: RegisterRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
+          // transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
