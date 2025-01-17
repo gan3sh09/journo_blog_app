@@ -58,10 +58,10 @@ packages:
     dependency: "direct dev"
     description:
       name: auto_route_generator
-      sha256: ff37f67ef8facfa841244324d8caa84b81db11aac655d8312011c176095722ea
+      sha256: c2e359d8932986d4d1bcad7a428143f81384ce10fef8d4aa5bc29e1f83766a46
       url: "https://pub.dev"
     source: hosted
-    version: "9.3.0"
+    version: "9.3.1"
   awesome_bottom_bar:
     dependency: "direct main"
     description:
@@ -403,6 +403,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flutter_icon_snackbar:
+    dependency: "direct main"
+    description:
+      name: flutter_icon_snackbar
+      sha256: bba7e238a7c8df2dfd1900fc9f58684ced906169fae1845605c1fcec1cda7e3b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   flutter_keyboard_visibility_linux:
     dependency: transitive
     description:
@@ -570,8 +578,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.7"
-  intl:
+  icon_animated:
     dependency: transitive
+    description:
+      name: icon_animated
+      sha256: "0847039648c98e53ac9be16cac170c025461caeb4d890cf4f88c78578ef9e7aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
+  intl:
+    dependency: "direct main"
     description:
       name: intl
       sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
@@ -634,6 +650,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
+  liquid_pull_to_refresh:
+    dependency: "direct main"
+    description:
+      name: liquid_pull_to_refresh
+      sha256: "11e4cd8c5460085a31b479ec4e1cd063eb8e599f35684d57a44dafa1fd1f67f3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   logging:
     dependency: transitive
     description:

@@ -30,6 +30,7 @@ class TextThemes {
     bodyMedium: TextStyle(
       fontSize: 14.sp,
       color: AppColors.textColor,
+      fontWeight: FontWeight.w500,
     ),
     bodySmall: TextStyle(
       fontSize: 13.sp,
@@ -66,6 +67,11 @@ class TextThemes {
     displayMedium: TextStyle(
       fontSize: 18,
       color: AppColors.whiteColor,
+      fontWeight: FontWeight.bold,
+    ),
+    displayLarge: TextStyle(
+      fontSize: 18,
+      color: AppColors.textColor,
       fontWeight: FontWeight.bold,
     ),
   );
@@ -135,6 +141,11 @@ class TextThemes {
     displayMedium: TextStyle(
       fontSize: 18,
       color: AppColors.whiteColor,
+      fontWeight: FontWeight.bold,
+    ),
+    displayLarge: TextStyle(
+      fontSize: 18,
+      color: AppColors.textColor,
       fontWeight: FontWeight.bold,
     ),
   );

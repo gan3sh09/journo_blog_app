@@ -35,7 +35,7 @@ class _GeneralState extends State<General> {
 
   List<Widget> pages = [
     Home(),
-    Category(),
+    Categories(),
     AddPosts(),
     Tags(),
     Profile(),
@@ -43,7 +43,10 @@ class _GeneralState extends State<General> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages.elementAt(visit),
+      body: IndexedStack(
+        index: visit,
+        children: pages,
+      ),
       bottomNavigationBar: BottomBarCreative(
         items: items,
         backgroundColor: AppColors.scafLightBackground,

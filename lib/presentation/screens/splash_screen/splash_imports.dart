@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journo_blog_app/core/constants/app_assets.dart';
-import 'package:journo_blog_app/presentation/router/router_imports.gr.dart';
+import 'package:journo_blog_app/utils/utils.dart';
 import '/core/constants/app_colors.dart';
 
 part 'splash_screen.dart';

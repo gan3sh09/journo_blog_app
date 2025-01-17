@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:journo_blog_app/utils/utils.dart';
 import 'api_constant.dart';
 import 'api_exception.dart';
 
@@ -15,22 +16,31 @@ class ApiClient {
     dio = Dio(baseOptions);
   }
 
+  Options options = Options();
+
   /// GET REQUEST
-  Future<Response> getRequest({required String path}) async {
+  Future<Response> getRequest(
+      {required String path, bool isTokenRequired = false}) async {
+    if (isTokenRequired == true) {
+      var token = await Utils.getToken();
+
+      options.headers = baseOptions.headers
+        ..addAll({"Authorization": "Bearer $token"});
+    }
     try {
       debugPrint('🚀================== API Request =============🚀');
       debugPrint('Request url: ${baseOptions.baseUrl + path}');
 
-      var response = await dio.get(path);
+      var response = await dio.get(path, options: options);
 
       debugPrint('❤️‍🔥================== API Response ============❤️‍🔥');
       debugPrint('Status code: ${response.statusCode.toString()}');
-      log('DATA: ${response.data}');
+      log('DATA: ${response.data.toString().substring(0, 300)}');
 
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusCode);
@@ -44,15 +54,19 @@ class ApiClient {
 
   /// POST REQUEST
   Future<Response> postRequest(
-      {required String path, required dynamic body}) async {
-    final options = Options(
-      headers: {
-        "Authorization": "Bearer 2215|71m1MRP6DBtSzA9EDmecFovy2o9dGTI585KEhONM"
-      },
-    );
+      {required String path,
+      dynamic body,
+      bool isTokenRequired = false}) async {
+    if (isTokenRequired == true) {
+      var token = await Utils.getToken();
+
+      options.headers = baseOptions.headers
+        ..addAll({"Authorization": "Bearer $token"});
+    }
     try {
       debugPrint('🚀================== API Request =============🚀');
       debugPrint('Request url: ${baseOptions.baseUrl + path}');
+      debugPrint('Body: $body');
 
       var response = await dio.post(
         path,
@@ -67,7 +81,7 @@ class ApiClient {
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
         debugPrint(e.response!.requestOptions.toString());
         throw ApiException(message: e.response!.statusCode);

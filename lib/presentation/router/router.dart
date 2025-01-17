@@ -26,12 +26,12 @@ class AppRouter extends RootStackRouter {
         ),
         CustomRoute(
           page: LoginRoute.page,
-          // transitionsBuilder: TransitionsBuilders.slideLeft,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
           page: RegisterRoute.page,
-          // transitionsBuilder: TransitionsBuilders.slideLeft,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
@@ -41,6 +41,26 @@ class AppRouter extends RootStackRouter {
         ),
         CustomRoute(
           page: HomeDetailsRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: AddTagsRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: UpdateTagsRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: AddCategoryRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: UpdateCategoryRoute.page,
           transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),

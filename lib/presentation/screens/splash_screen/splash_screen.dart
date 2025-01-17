@@ -18,8 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   navigateToOnboarding() async {
     await Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        // AutoRouter.of(context).replace(const OnboardingScreenRoute());
-        context.router.replace(const OnboardingScreenRoute());
+        Utils.manipulationLogin(context);
       }
     });
   }
@@ -36,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
           child: FadedScaleAnimation(
             child: Image.asset(
               AppAssets.assetsImagesLogo,
-              height: 42.h,
-              width: 139.w,
+              height: 44.h,
+              width: 144.w,
             ),
           ),
         ),

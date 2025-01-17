@@ -64,6 +64,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 PrimaryButton(
                   title: 'Get Started',
                   onPressed: () => context.router.push(const AuthRoute()),
+                  /* onPressed: () async {
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    var token = prefs.getString('token');
+                    log(token.toString());
+                  }, */
                 ),
                 51.heightBox,
                 Row(

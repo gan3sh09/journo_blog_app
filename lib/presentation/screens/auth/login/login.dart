@@ -9,11 +9,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  LoginViewModel loginViewModel = LoginViewModel();
+  late LoginViewModel loginViewModel;
 
   @override
   void initState() {
-    super.initState();
+    loginViewModel = LoginViewModel(repository: context.read<Repository>());
     loginViewModel.emailController.addListener(() {
       setState(() {
         loginViewModel.showClearEmailIcon =
@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
             loginViewModel.passwordController.text.isNotEmpty;
       });
     });
+    super.initState();
   }
 
   @override
@@ -63,139 +64,175 @@ class _LoginState extends State<Login> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            50.heightBox,
-                            Center(
-                              child: Text(
-                                'Login',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                        child: Form(
+                          key: loginViewModel.formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              50.heightBox,
+                              Center(
+                                child: Text(
+                                  'Login',
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
+                                ),
                               ),
-                            ),
-                            48.heightBox,
-                            Text(
-                              'Email',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            5.heightBox,
-                            CustomTextFormField(
-                              controller: loginViewModel.emailController,
-                              keyboardType: TextInputType.text,
-                              prefixIcon: Icon(
-                                HugeIcons.strokeRoundedMail01,
-                                color: AppColors.textColor,
+                              48.heightBox,
+                              Text(
+                                'Email',
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
-                              hintText: 'gan3shpandit@gmail.com',
-                              onChanged: (value) {
-                                setState(() {
-                                  loginViewModel.showClearEmailIcon =
-                                      value.isNotEmpty;
-                                });
-                              },
-                              suffixIcon: loginViewModel.showClearEmailIcon
-                                  ? IconButton(
-                                      onPressed: () {
-                                        loginViewModel.emailController.clear();
-                                        setState(() {
-                                          loginViewModel.showClearEmailIcon =
-                                              false;
-                                        });
-                                      },
-                                      icon: Icon(
-                                        HugeIcons
-                                            .strokeRoundedMultiplicationSign,
-                                        size: 20,
-                                      ),
-                                    )
-                                  : null,
-                            ),
-                            20.heightBox,
-                            Text(
-                              'Password',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            5.heightBox,
-                            CustomTextFormField(
-                              controller: loginViewModel.passwordController,
-                              keyboardType: TextInputType.text,
-                              prefixIcon: Icon(
-                                HugeIcons.strokeRoundedFingerAccess,
-                                color: AppColors.textColor,
-                              ),
-                              obscureText: !loginViewModel.isPasswordVisible,
-                              onChanged: (value) {
-                                setState(() {
-                                  loginViewModel.showClearPasswordIcon =
-                                      value.isNotEmpty;
-                                });
-                              },
-                              suffixIcon: Padding(
-                                padding: EdgeInsets.only(right: 12.w),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    if (loginViewModel.showClearPasswordIcon)
-                                      GestureDetector(
-                                        onTap: () {
-                                          loginViewModel.passwordController
+                              5.heightBox,
+                              CustomTextFormField(
+                                controller: loginViewModel.emailController,
+                                keyboardType: TextInputType.text,
+                                prefixIcon: Icon(
+                                  HugeIcons.strokeRoundedMail01,
+                                  color: AppColors.textColor,
+                                ),
+                                validator: (email) {
+                                  if (email == null || email.isEmpty) {
+                                    return 'Please enter your email';
+                                  } else if (!email.isValidEmail) {
+                                    return 'Please enter valid email';
+                                  }
+                                  return null;
+                                },
+                                hintText: 'gan3shpandit@gmail.com',
+                                onChanged: (value) {
+                                  setState(() {
+                                    loginViewModel.showClearEmailIcon =
+                                        value.isNotEmpty;
+                                  });
+                                },
+                                suffixIcon: loginViewModel.showClearEmailIcon
+                                    ? IconButton(
+                                        onPressed: () {
+                                          loginViewModel.emailController
                                               .clear();
                                           setState(() {
-                                            loginViewModel
-                                                .showClearPasswordIcon = false;
+                                            loginViewModel.showClearEmailIcon =
+                                                false;
                                           });
                                         },
-                                        child: Icon(
+                                        icon: Icon(
                                           HugeIcons
                                               .strokeRoundedMultiplicationSign,
                                           size: 20,
                                         ),
+                                      )
+                                    : null,
+                              ),
+                              20.heightBox,
+                              Text(
+                                'Password',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              5.heightBox,
+                              CustomTextFormField(
+                                controller: loginViewModel.passwordController,
+                                keyboardType: TextInputType.text,
+                                validator: (password) {
+                                  if (password == null || password.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  /* else if (!password.isValidPassword) {
+                                    return 'Please enter valid password';
+                                  } */
+                                  else if (password.length < 6) {
+                                    return 'Password must be at least 6 characters long';
+                                  }
+                                  return null;
+                                },
+                                prefixIcon: Icon(
+                                  HugeIcons.strokeRoundedFingerAccess,
+                                  color: AppColors.textColor,
+                                ),
+                                obscureText: !loginViewModel.isPasswordVisible,
+                                onChanged: (value) {
+                                  setState(() {
+                                    loginViewModel.showClearPasswordIcon =
+                                        value.isNotEmpty;
+                                  });
+                                },
+                                suffixIcon: Padding(
+                                  padding: EdgeInsets.only(right: 12.w),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      if (loginViewModel.showClearPasswordIcon)
+                                        GestureDetector(
+                                          onTap: () {
+                                            loginViewModel.passwordController
+                                                .clear();
+                                            setState(() {
+                                              loginViewModel
+                                                      .showClearPasswordIcon =
+                                                  false;
+                                            });
+                                          },
+                                          child: Icon(
+                                            HugeIcons
+                                                .strokeRoundedMultiplicationSign,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      12.widthBox,
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            loginViewModel.isPasswordVisible =
+                                                !loginViewModel
+                                                    .isPasswordVisible;
+                                          });
+                                        },
+                                        child: Icon(
+                                          loginViewModel.isPasswordVisible
+                                              ? HugeIcons.strokeRoundedEye
+                                              : HugeIcons
+                                                  .strokeRoundedViewOffSlash,
+                                          size: 20,
+                                        ),
                                       ),
-                                    12.widthBox,
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          loginViewModel.isPasswordVisible =
-                                              !loginViewModel.isPasswordVisible;
-                                        });
-                                      },
-                                      child: Icon(
-                                        loginViewModel.isPasswordVisible
-                                            ? HugeIcons.strokeRoundedEye
-                                            : HugeIcons
-                                                .strokeRoundedViewOffSlash,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            10.heightBox,
-                            RememberMeWidget(
-                              leftText: 'Remember me',
-                              rightText: 'Forgot Password?',
-                            ),
-                            40.heightBox,
-                            PrimaryButton(
-                              title: 'Login',
-                              onPressed: () => context.router.replace(
-                                const GeneralRoute(),
+                              10.heightBox,
+                              RememberMeWidget(
+                                leftText: 'Remember me',
+                                rightText: 'Forgot Password?',
                               ),
-                            ),
-                            20.heightBox,
-                            Center(
-                              child: CustomRichText(
-                                text: 'Don’t have an account?',
-                                textspan: '  Sign Up',
-                                onTap: () => context.router.replace(
-                                  const RegisterRoute(),
+                              40.heightBox,
+                              BlocBuilder<VelocityBloc<bool>,
+                                  VelocityState<bool>>(
+                                bloc: loginViewModel.isLoadingBloc,
+                                builder: (context, state) {
+                                  return PrimaryButton(
+                                    title: 'Login',
+                                    isLoading: state.data,
+                                    onPressed: () {
+                                      if (loginViewModel.formKey.currentState!
+                                          .validate()) {
+                                        loginViewModel.login(context);
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
+                              20.heightBox,
+                              Center(
+                                child: CustomRichText(
+                                  text: 'Don’t have an account?',
+                                  textspan: '  Sign Up',
+                                  onTap: () => context.router.replace(
+                                    const RegisterRoute(),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

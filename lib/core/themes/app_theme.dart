@@ -10,7 +10,7 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.scafLightBackground,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.primaryColor,
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0,
       scrolledUnderElevation: 0,
       iconTheme: IconThemeData(

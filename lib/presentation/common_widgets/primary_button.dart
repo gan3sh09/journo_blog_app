@@ -5,13 +5,16 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.isLoading,
   });
 
   final String title;
   final VoidCallback onPressed;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primaryColor,
@@ -21,10 +24,14 @@ class PrimaryButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
+      child: isLoading == true
+          ? CupertinoActivityIndicator(
+              color: AppColors.whiteColor,
+            )
+          : Text(
+              title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
     );
   }
 }
