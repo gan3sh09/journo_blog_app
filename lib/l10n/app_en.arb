@@ -1,0 +1,82 @@
+{
+
+    "getStarted" : "Get Started",
+    "onboardDescriptionOne" : "Discover, engage and read the latest articles oras well as share your own thoughts and ideas with the community",
+    "onboardDescriptionTwo" : "Customize your reading experience and join the conversation by creating an account",
+    "onboardDescriptionThree" : "Explore a wide selection of categories, or use the search bar to find specific topics",
+    "skip": "Skip",
+    "next": "Next",
+    "login": "Login",
+    "register": "Register",
+    "authTitle": "Explore the world,\nBillions of Thoughts.",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password",
+    "donotHaveAnAccount": "Don’t have an account? ",
+    "signUp": "Sign Up",
+    "alreadyHaveAnAccount": "Already have an account? ",
+    "dashboard": "Dashboard",
+    "category": "Category",
+    "tags": "Tags",
+    "profile": "Profile",
+    "latestPost": "Latest Posts",
+    "seeAll": "See All",
+    "categories": "Categories",
+    "addCategory": "Add Category",
+    "title": "Title",
+    "slug": "Slug",
+    "addNewCategory": "Add New Category",
+    "updateCategory": "Update Category",
+    "confirmDelete": "Confirm Delete",
+    "deleteCategoryText": "Are you sure you want to delete this category?",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "tags": "Tags",
+    "addTags": "Add Tags",
+    "addNewTag": "Add New Tag",
+    "updateTag": "Update Tag",
+    "deleteTagText": "Are you sure you want to delete this tag?",
+    "posts": "Posts",
+    "following": "Following",
+    "followers": "Followers",
+    "confirmLogout": "Confirm Logout",
+    "logoutText": "Are you sure you want to logout?",
+    "confirmExit": "Confirm Exit",
+    "confirmExitText": "Are you sure you want to exit app?",
+    "addPost": "Add Post",
+    "description": "Description",
+    "add": "Add",
+    "postFieldCannotBeEmpty" : "Post fields cann't be empty",
+    "enterDescriptionHere" : "Enter description here...",
+    "pleaseEnterATitle" : "Please enter a title",
+    "pleaseEnterASlug" : "Please enter a slug",
+    "myPosts" : "My Posts",
+    "youHaveSuccessfullyLoggedOut":"You have successfully Logged out.",
+    "pleaseEnterYourEmail" : "Please enter your email",
+    "pleaseEnterYourPassword" : "Please enter your password",
+    "categoryAddedSuccessfully": "Category Added Successfully.",
+    "tagAddedSuccessfully": "Tag Added Successfully.",
+    "categoryUpdatedSuccessfully": "Category Updated Successfully.",
+    "tagUpdatedSuccessfully": "Tag Updated Successfully.",
+    "categoryDeletedSuccessfully": "Category Deleted Successfully.",
+    "tagDeletedSuccessfully": "Tag Deleted Successfully.",
+    "pleaseEnterYourEmail": "Please enter your email",
+    "pleaseEnterValidEmail": "Please enter valid email",
+    "pleaseEnterYourPassword": "Please enter your password",
+    "passwordMustBeAtLeastSixCharacter": "Password must be at least 6 characters long",
+    "passwordDOnotMatch": "The passwords didn't match.",
+    "language" : "Language"
+    
+
+
+
+    
+
+
+    
+
+
+    
+}

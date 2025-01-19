@@ -13,6 +13,7 @@ class ApiEndpointUrls {
   // Post Endpoint URLS
   static const String posts = 'posts';
   static const String userPosts = 'user-posts';
+  static const String addPosts = 'add-posts';
 
   // Category Endpoint URLS
   static const String categories = 'categories';

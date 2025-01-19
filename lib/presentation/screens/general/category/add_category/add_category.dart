@@ -13,8 +13,15 @@ class _AddCategoryState extends State<AddCategory> {
 
   @override
   void initState() {
-    addCategoryViewModel = AddCategoryViewModel(repository: context.read<Repository>());
+    addCategoryViewModel =
+        AddCategoryViewModel(repository: context.read<Repository>());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    addCategoryViewModel.textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -25,7 +32,9 @@ class _AddCategoryState extends State<AddCategory> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Add Category'),
+          title: Text(
+            AppLocalizations.of(context)!.addCategory,
+          ),
           leading: AutoLeadingButton(),
         ),
         body: SafeArea(
@@ -38,7 +47,7 @@ class _AddCategoryState extends State<AddCategory> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Title',
+                  AppLocalizations.of(context)!.title,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -50,7 +59,7 @@ class _AddCategoryState extends State<AddCategory> {
                 ),
                 20.heightBox,
                 Text(
-                  'Slug',
+                  AppLocalizations.of(context)!.slug,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -66,8 +75,9 @@ class _AddCategoryState extends State<AddCategory> {
                   builder: (context, state) {
                     return PrimaryButton(
                       isLoading: state.data,
-                      title: 'Add New Category',
-                      onPressed: () => addCategoryViewModel.addNewCategories(context),
+                      title: AppLocalizations.of(context)!.addNewCategory,
+                      onPressed: () =>
+                          addCategoryViewModel.addNewCategories(context),
                     );
                   },
                 ),

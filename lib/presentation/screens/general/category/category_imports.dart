@@ -10,7 +10,10 @@ import 'package:journo_blog_app/presentation/shimmer_effects/tags_shimmer.dart';
 import 'package:velocity_bloc/velocity_bloc.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../data/repositories/repository.dart';
+import '../../../enums/navigate_type.dart';
 import '../../../router/router_imports.gr.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'category_model.dart';
 part 'category.dart';
 part 'category_view_model.dart';

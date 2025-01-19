@@ -39,7 +39,9 @@ class CategoriesViewModel {
       IconSnackBar.show(
         context,
         snackBarType: SnackBarType.success,
-        label: data.message.toString(),
+        // label: data.message.toString(),
+        label: AppLocalizations.of(context)!.categoryDeletedSuccessfully,
+
         labelTextStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,

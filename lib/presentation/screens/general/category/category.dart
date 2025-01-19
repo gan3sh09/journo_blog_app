@@ -1,7 +1,9 @@
 part of 'category_imports.dart';
 
+@RoutePage()
 class Categories extends StatefulWidget {
-  const Categories({super.key});
+  final NavigateType navigateType;
+  const Categories({super.key, required this.navigateType});
 
   @override
   State<Categories> createState() => _CategoriesState();
@@ -26,16 +28,20 @@ class _CategoriesState extends State<Categories> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Categories'),
+          automaticallyImplyLeading:
+              NavigateType.outer == widget.navigateType ? true : false,
+          leading: AutoLeadingButton(),
+          title: Text(
+            AppLocalizations.of(context)!.categories,
+          ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 20.w),
+              padding: EdgeInsets.only(right: 40.w),
               child: IconButton(
                 onPressed: () => categoriesViewModel.gotoAddCategories(context),
                 icon: Badge(
                   label: Text(
-                    'Add',
+                    AppLocalizations.of(context)!.add,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                   child: Icon(
@@ -68,9 +74,30 @@ class _CategoriesState extends State<Categories> {
                         "${index + 1}".toString(),
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      title: Text(
-                        categoriesData.title ?? "No Category",
-                        style: Theme.of(context).textTheme.labelLarge,
+                      title: GestureDetector(
+                        onTap: () {
+                          NavigateType.outer == widget.navigateType
+                              ? null
+                              : AutoRouter.of(context)
+                                  .maybePop<Category>(categoriesData);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10.r),
+                          decoration: BoxDecoration(
+                            color: AppColors.scafLightBackground,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Text(
+                            categoriesData.title ?? "No Category",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -83,25 +110,21 @@ class _CategoriesState extends State<Categories> {
                             ),
                             child: Icon(
                               HugeIcons.strokeRoundedTaskEdit02,
-                              color: Colors.green,
+                              color: AppColors.primaryColor,
                             ),
                           ),
                           25.widthBox,
                           GestureDetector(
-                            /* onTap: () => categoriesViewModel.deleteCategories(
-                              context,
-                              categoriesData.id.toString(),
-                              index,
-                            ), */
                             onTap: () {
                               showDialog(
                                 context: context,
                                 barrierDismissible: true,
                                 builder: (_) => CustomDialog(
-                                  title: 'Confirm Delete',
-                                  subTitle:
-                                      'Are you sure you want to delete this category?',
-                                  buttonText: 'Delete',
+                                  title: AppLocalizations.of(context)!
+                                      .confirmDelete,
+                                  subTitle: AppLocalizations.of(context)!
+                                      .deleteCategoryText,
+                                  buttonText: AppLocalizations.of(context)!.yes,
                                   icon: HugeIcons.strokeRoundedAlertCircle,
                                   onConfirm: () {
                                     categoriesViewModel.deleteCategories(

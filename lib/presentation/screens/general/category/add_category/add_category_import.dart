@@ -9,6 +9,8 @@ import 'package:journo_blog_app/presentation/common_widgets/common_widgets_impor
 import 'package:journo_blog_app/presentation/screens/general/category/category_model.dart';
 import 'package:velocity_bloc/velocity_bloc.dart';
 import '../../../../../core/constants/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 part 'add_category.dart';
 part 'add_category_model.dart';

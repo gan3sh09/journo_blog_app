@@ -19,7 +19,7 @@ class CustomCachedImage extends StatelessWidget {
       width: width,
       imageUrl: photoUrl,
       fit: BoxFit.cover,
-      placeholder: (_, __) => const Center(
+      placeholder: (_, __) => Center(
         child: CupertinoActivityIndicator(
           color: AppColors.primaryColor,
         ),

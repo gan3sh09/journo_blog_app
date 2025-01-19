@@ -20,8 +20,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
+      value: SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+        statusBarColor: AppColors.primaryColor,
       ),
       child: Scaffold(
         body: SafeArea(
@@ -33,16 +34,58 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               } else if (state is VelocityUpdateState) {
                 return LiquidPullToRefresh(
                   onRefresh: () => homeViewModel.fetchAllPosts(),
-                  showChildOpacityTransition: true,
+                  showChildOpacityTransition: false,
                   backgroundColor: AppColors.whiteColor,
                   key: homeViewModel.homeRefreshIndicatorKey,
                   color: AppColors.primaryColor,
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
                     child: Column(
                       children: [
-                        SizedBox(
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 2.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                context
+                                    .read<VelocityBloc<ProfileModel>>()
+                                    .state
+                                    .data
+                                    .userDetails!
+                                    .name
+                                    .toString(),
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              SizedBox(
+                                width: 45.w,
+                                height: 45.h,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: CustomCachedImage(
+                                    photoUrl: context
+                                        .read<VelocityBloc<ProfileModel>>()
+                                        .state
+                                        .data
+                                        .userDetails!
+                                        .profilePhotoUrl
+                                        .toString(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 6,
+                          thickness: 1,
+                          color: Colors.grey.shade200,
+                        ),
+                        15.heightBox,
+                        /* SizedBox(
                           height: 200.h,
                           child: PageView.builder(
                             controller: homeViewModel.pageController,
@@ -62,8 +105,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               );
                             },
                           ),
+                        ), */
+                        SizedBox(
+                          height: 200.h,
+                          child: CarouselSlider.builder(
+                            itemCount: state.data.popularPosts!.length,
+                            carouselController:
+                                homeViewModel.carouselSliderController,
+                            itemBuilder: (context, index, realIndex) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  child: CustomCachedImage(
+                                    photoUrl: state
+                                        .data.popularPosts![index].featuredimage
+                                        .toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              height: 200.h,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.77,
+                              onPageChanged: (index, reason) {
+                                homeViewModel.currentIndex = index;
+                              },
+                            ),
+                          ),
                         ),
-                        10.heightBox,
+                        /*  10.heightBox,
                         SmoothPageIndicator(
                           controller: homeViewModel.pageController,
                           count: state.data.popularPosts!.length,
@@ -72,8 +145,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             dotHeight: 10,
                             dotWidth: 10,
                           ),
-                          onDotClicked: (index) {},
-                        ),
+                          onDotClicked: (index) {
+                             homeViewModel.carouselSliderController.animateToPage(index);
+                          },
+                        ), */
                         20.heightBox,
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -81,11 +156,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Latest Posts',
+                                AppLocalizations.of(context)!.latestPost,
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                               Text(
-                                'See All',
+                                AppLocalizations.of(context)!.seeAll,
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],

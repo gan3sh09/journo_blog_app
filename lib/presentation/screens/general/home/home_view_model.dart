@@ -3,7 +3,9 @@ part of 'home_imports.dart';
 class HomeViewModel {
   final Repository repository;
 
-  final PageController pageController = PageController();
+  // final PageController pageController = PageController();
+   final CarouselSliderController carouselSliderController = CarouselSliderController(); // Use CarouselController
+  int currentIndex = 0; 
 
   HomeViewModel({required this.repository});
 

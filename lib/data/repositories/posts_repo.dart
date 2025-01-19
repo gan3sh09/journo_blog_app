@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:dio/dio.dart';
+import 'package:journo_blog_app/data/models/logout_model.dart';
 import 'package:journo_blog_app/presentation/screens/general/profile/profile_imports.dart';
 
 import '../../presentation/screens/general/home/home_imports.dart';
@@ -44,5 +46,46 @@ class PostsRepo extends ApiClient {
       ProfileModel();
     }
     return ProfileModel();
+  }
+
+  Future<LogoutModel> addNewPosts(
+    String title,
+    String slug,
+    String categories,
+    String tags,
+    String body,
+    String userId,
+    String filePath,
+    String filename,
+  ) async {
+    final formData = FormData.fromMap({
+      'title': title,
+      'slug': slug,
+      'categories': categories,
+      'tags': tags,
+      'body': body,
+      'status': '1',
+      'user_id': userId,
+      'featuredimage':
+          await MultipartFile.fromFile(filePath, filename: filename),
+    });
+    try {
+      final response = await postRequest(
+        path: ApiEndpointUrls.addPosts,
+        body: formData,
+        isTokenRequired: true,
+      );
+      if (response.statusCode == 200) {
+        final responseData = logoutModelFromJson(jsonEncode(response.data));
+
+        return responseData;
+      } else {
+        LogoutModel();
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      LogoutModel();
+    }
+    return LogoutModel();
   }
 }

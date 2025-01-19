@@ -22,6 +22,12 @@ class _UpdateCategoryState extends State<UpdateCategory> {
   }
 
   @override
+  void dispose() {
+    updateCategoryViewModel.textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -29,7 +35,9 @@ class _UpdateCategoryState extends State<UpdateCategory> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Update Category'),
+          title: Text(
+            AppLocalizations.of(context)!.updateCategory,
+          ),
           leading: AutoLeadingButton(),
         ),
         body: SafeArea(
@@ -42,7 +50,7 @@ class _UpdateCategoryState extends State<UpdateCategory> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Title',
+                  AppLocalizations.of(context)!.title,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -54,7 +62,7 @@ class _UpdateCategoryState extends State<UpdateCategory> {
                 ),
                 20.heightBox,
                 Text(
-                  'Slug',
+                  AppLocalizations.of(context)!.slug,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -70,7 +78,7 @@ class _UpdateCategoryState extends State<UpdateCategory> {
                   builder: (context, state) {
                     return PrimaryButton(
                       isLoading: state.data,
-                      title: 'Update Category',
+                      title: AppLocalizations.of(context)!.updateCategory,
                       onPressed: () => updateCategoryViewModel.updateCategories(
                         context,
                         widget.categoriesData.id.toString(),

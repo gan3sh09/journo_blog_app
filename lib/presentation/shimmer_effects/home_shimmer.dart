@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:journo_blog_app/presentation/common_widgets/common_widgets_imports.dart';
@@ -10,17 +11,56 @@ class HomeShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey.shade300,
+                    highlightColor: Colors.grey.shade100,
+                    child: Container(
+                      height: 20.h,
+                      width: 90.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                    ),
+                  ),
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey.shade300,
+                    highlightColor: Colors.grey.shade100,
+                    child: Container(
+                      height: 45.h,
+                      width: 45.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(100.r),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              height: 6,
+              thickness: 1,
+              color: Colors.grey.shade200,
+            ),
+            15.heightBox,
+
             SizedBox(
               height: 200.h,
-              child: PageView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) {
+              child: CarouselSlider.builder(
+                itemCount: 2,
+                itemBuilder: (context, index, realIndex) {
                   return Padding(
-                    padding: EdgeInsets.only(left: 12.w, right: 12.w),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey.shade300,
                       highlightColor: Colors.grey.shade100,
@@ -35,28 +75,12 @@ class HomeShimmer extends StatelessWidget {
                     ),
                   );
                 },
-              ),
-            ),
-            10.heightBox,
-            // Shimmer for Dots Indicator
-            Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.h),
-                    child: Container(
-                      height: 12.h,
-                      width: 12.w,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
+                options: CarouselOptions(
+                  height: 200.h,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.77,
+                  onPageChanged: (index, reason) {},
                 ),
               ),
             ),

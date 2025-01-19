@@ -8,18 +8,19 @@ class AddPosts extends StatefulWidget {
 }
 
 class _AddPostsState extends State<AddPosts> {
-  final QuillController _controller = QuillController.basic();
-  bool isEditorEmpty = true;
+  late AddPostViewModel addPostViewModel;
 
   @override
   void initState() {
     super.initState();
+    addPostViewModel = AddPostViewModel(repository: context.read<Repository>());
 
-    _controller.addListener(() {
-      final isEmpty = _controller.document.toPlainText().trim().isEmpty;
-      if (isEmpty != isEditorEmpty) {
+    addPostViewModel.controller.addListener(() {
+      final isEmpty =
+          addPostViewModel.controller.document.toPlainText().trim().isEmpty;
+      if (isEmpty != addPostViewModel.isEditorEmpty) {
         setState(() {
-          isEditorEmpty = isEmpty;
+          addPostViewModel.isEditorEmpty = isEmpty;
         });
       }
     });
@@ -27,12 +28,14 @@ class _AddPostsState extends State<AddPosts> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    addPostViewModel.textEditingController.dispose();
+    addPostViewModel.controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
@@ -40,157 +43,334 @@ class _AddPostsState extends State<AddPosts> {
       child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text('Add Post'),
+            title: Text(
+              AppLocalizations.of(context)!.addPost,
+            ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 5.w),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    HugeIcons.strokeRoundedTick01,
-                    size: 28.h,
-                  ),
+                child: BlocBuilder<VelocityBloc<bool>, VelocityState<bool>>(
+                  bloc: addPostViewModel.isLoadingBloc,
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        if (!addPostViewModel.formKey.currentState!
+                            .validate()) {
+                          IconSnackBar.show(
+                            context,
+                            snackBarType: SnackBarType.alert,
+                            label: AppLocalizations.of(context)!
+                                .postFieldCannotBeEmpty,
+                            labelTextStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.whiteColor,
+                            ),
+                          );
+                        } else {
+                          addPostViewModel.addNewPost(
+                            context,
+                            context
+                                .read<VelocityBloc<ProfileModel>>()
+                                .state
+                                .data
+                                .userDetails!
+                                .id
+                                .toString(),
+                          );
+                        }
+                      },
+
+                      /*  onPressed: () => addPostViewModel.addNewPost(
+                        context,
+                        context
+                            .read<VelocityBloc<ProfileModel>>()
+                            .state
+                            .data
+                            .userDetails!
+                            .id
+                            .toString(),
+                      ), */
+                      /* onPressed: () {
+                        log(
+                          context
+                              .read<VelocityBloc<ProfileModel>>()
+                              .state
+                              .data
+                              .userDetails!
+                              .id
+                              .toString(),
+                        );
+                      }, */
+                      icon: state.data == true
+                          ? CupertinoActivityIndicator(
+                              color: AppColors.whiteColor,
+                            )
+                          : Icon(
+                              HugeIcons.strokeRoundedTick01,
+                              size: 28.h,
+                            ),
+                    );
+                  },
                 ),
               )
             ],
           ),
-          body: ListView(
-            padding: EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: 20,
-            ),
-            children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20.r),
-                    child: Image.asset(
-                        AppAssets.assetsImagesAddPostsImagePlaceholder),
-                  ),
-                  Positioned(
-                    right: 10.w,
-                    bottom: 10.h,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add_a_photo_outlined,
-                        color: AppColors.primaryColor,
-                        size: 28,
-                      ),
-                    ),
-                  ),
-                ],
+          body: Form(
+            key: addPostViewModel.formKey,
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 20,
               ),
-              20.heightBox,
-              CustomTextFormField(
-                keyboardType: TextInputType.text,
-                hintText: 'Title',
-                fillColor: AppColors.whiteColor,
-              ),
-              20.heightBox,
-              CustomTextFormField(
-                keyboardType: TextInputType.text,
-                hintText: 'Slug',
-                fillColor: AppColors.whiteColor,
-              ),
-              20.heightBox,
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                  vertical: 15.h,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tags',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-              20.heightBox,
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                  vertical: 15.h,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Categories',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-              20.heightBox,
-              Text(
-                'Description',
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              3.heightBox,
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(
-                    width: 1,
-                    color: AppColors.greyColor,
-                  ),
-                ),
-                child: QuillSimpleToolbar(
-                  controller: _controller,
-                  configurations: const QuillSimpleToolbarConfigurations(),
-                ),
-              ),
-              20.heightBox,
-              Container(
-                padding: EdgeInsets.all(20),
-                height: 400,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Stack(
-                  children: [
-                    QuillEditor.basic(
-                      controller: _controller,
-                    ),
-                    if (isEditorEmpty)
-                      IgnorePointer(
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Enter your description here...",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
+              children: [
+                BlocBuilder<VelocityBloc<XFile?>, VelocityState<XFile?>>(
+                  bloc: addPostViewModel.selectedImageBloc,
+                  builder: (context, state) {
+                    return Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.r),
+                          child: state.data != null
+                              ? Image.file(
+                                  File(state.data!.path),
+                                  height: SizeConfig.screenHeight * 0.25,
+                                  width: SizeConfig.screenWidth,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  AppAssets
+                                      .assetsImagesAddPostsImagePlaceholder,
+                                ),
+                        ),
+                        Positioned(
+                          right: 10.w,
+                          bottom: 10.h,
+                          child: IconButton(
+                            onPressed: () =>
+                                addPostViewModel.pickImage(context),
+                            icon: Icon(
+                              Icons.add_a_photo_outlined,
+                              color: AppColors.primaryColor,
+                              size: 28,
                             ),
                           ),
                         ),
-                      ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
-              ),
-            ],
+                20.heightBox,
+                Text(
+                  AppLocalizations.of(context)!.title,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                5.heightBox,
+                CustomTextFormField(
+                  controller: addPostViewModel.textEditingController,
+                  keyboardType: TextInputType.text,
+                  validator: (title) {
+                    if (title == null || title.isEmpty) {
+                      return AppLocalizations.of(context)!.pleaseEnterATitle;
+                    }
+                    return null;
+                  },
+                  hintText: AppLocalizations.of(context)!.title,
+                  fillColor: AppColors.whiteColor,
+                ),
+                20.heightBox,
+                Text(
+                  AppLocalizations.of(context)!.slug,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                5.heightBox,
+                CustomTextFormField(
+                  controller: addPostViewModel.textEditingController,
+                  keyboardType: TextInputType.text,
+                  readOnly: true,
+                  validator: (slug) {
+                    if (slug == null || slug.isEmpty) {
+                      return AppLocalizations.of(context)!.pleaseEnterASlug;
+                    }
+                    return null;
+                  },
+                  hintText: AppLocalizations.of(context)!.slug,
+                  fillColor: AppColors.whiteColor,
+                ),
+                20.heightBox,
+                Text(
+                  AppLocalizations.of(context)!.tags,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                5.heightBox,
+                BlocBuilder<VelocityBloc<Tag?>, VelocityState<Tag?>>(
+                  bloc: addPostViewModel.selectedTagBloc,
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: () async {
+                        var data = await AutoRouter.of(context).push<Tag>(
+                            TagsRoute(navigateType: NavigateType.inner));
+                        // log(data!.title.toString());
+                        addPostViewModel.selectedTagBloc.onUpdateData(data);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 15.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            state.data != null
+                                ? Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 5.w,
+                                      vertical: 2.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    child: Text(
+                                      state.data!.title.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
+                                    ),
+                                  )
+                                : Text(
+                                    AppLocalizations.of(context)!.tags,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                20.heightBox,
+                Text(
+                  AppLocalizations.of(context)!.category,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                5.heightBox,
+                BlocBuilder<VelocityBloc<Category?>, VelocityState<Category?>>(
+                  bloc: addPostViewModel.selectedCategoryBloc,
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: () async {
+                        var data = await AutoRouter.of(context).push<Category>(
+                            CategoriesRoute(navigateType: NavigateType.inner));
+                        // log(data!.title.toString());
+                        addPostViewModel.selectedCategoryBloc
+                            .onUpdateData(data);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 15.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            state.data != null
+                                ? Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 5.w,
+                                      vertical: 2.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      color: AppColors.primaryColor,
+                                    ),
+                                    child: Text(
+                                      state.data!.title.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
+                                    ),
+                                  )
+                                : Text(
+                                    AppLocalizations.of(context)!.category,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                20.heightBox,
+                Text(
+                  AppLocalizations.of(context)!.description,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                3.heightBox,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      width: 1,
+                      color: AppColors.greyColor,
+                    ),
+                  ),
+                  child: QuillSimpleToolbar(
+                    controller: addPostViewModel.controller,
+                    configurations: const QuillSimpleToolbarConfigurations(),
+                  ),
+                ),
+                20.heightBox,
+                Container(
+                  padding: EdgeInsets.all(20),
+                  height: 400,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Stack(
+                    children: [
+                      QuillEditor.basic(
+                        controller: addPostViewModel.controller,
+                      ),
+                      if (addPostViewModel.isEditorEmpty)
+                        IgnorePointer(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .enterDescriptionHere,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )),
     );
   }

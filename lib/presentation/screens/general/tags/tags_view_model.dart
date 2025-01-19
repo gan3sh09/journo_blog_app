@@ -39,7 +39,8 @@ class TagsViewModel {
       IconSnackBar.show(
         context,
         snackBarType: SnackBarType.success,
-        label: data.message.toString(),
+        // label: data.message.toString(),
+        label: AppLocalizations.of(context)!.tagDeletedSuccessfully,
         labelTextStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,

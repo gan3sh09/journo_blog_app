@@ -9,44 +9,47 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i13;
-import 'package:flutter/material.dart' as _i14;
+import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
+import 'package:journo_blog_app/presentation/enums/navigate_type.dart' as _i16;
 import 'package:journo_blog_app/presentation/screens/auth/auth_imports.dart'
     as _i3;
 import 'package:journo_blog_app/presentation/screens/auth/login/login_imports.dart'
-    as _i6;
+    as _i7;
 import 'package:journo_blog_app/presentation/screens/auth/register/register_imports.dart'
-    as _i8;
+    as _i9;
 import 'package:journo_blog_app/presentation/screens/general/category/add_category/add_category_import.dart'
     as _i1;
-import 'package:journo_blog_app/presentation/screens/general/category/category_model.dart'
-    as _i15;
-import 'package:journo_blog_app/presentation/screens/general/category/update_category/update_category_import.dart'
-    as _i11;
-import 'package:journo_blog_app/presentation/screens/general/general_imports.dart'
+import 'package:journo_blog_app/presentation/screens/general/category/category_imports.dart'
     as _i4;
-import 'package:journo_blog_app/presentation/screens/general/home/home_imports.dart'
+import 'package:journo_blog_app/presentation/screens/general/category/category_model.dart'
+    as _i17;
+import 'package:journo_blog_app/presentation/screens/general/category/update_category/update_category_import.dart'
+    as _i12;
+import 'package:journo_blog_app/presentation/screens/general/general_imports.dart'
     as _i5;
+import 'package:journo_blog_app/presentation/screens/general/home/home_imports.dart'
+    as _i6;
 import 'package:journo_blog_app/presentation/screens/general/tags/add_tags/add_tags_import.dart'
     as _i2;
 import 'package:journo_blog_app/presentation/screens/general/tags/tags_imports.dart'
-    as _i10;
+    as _i11;
 import 'package:journo_blog_app/presentation/screens/general/tags/update_tags/update_tags_import.dart'
-    as _i12;
+    as _i13;
 import 'package:journo_blog_app/presentation/screens/onboarding_screen/onboarding_imports.dart'
-    as _i7;
+    as _i8;
 import 'package:journo_blog_app/presentation/screens/splash_screen/splash_imports.dart'
-    as _i9;
+    as _i10;
 
 /// generated route for
 /// [_i1.AddCategory]
-class AddCategoryRoute extends _i13.PageRouteInfo<void> {
-  const AddCategoryRoute({List<_i13.PageRouteInfo>? children})
+class AddCategoryRoute extends _i14.PageRouteInfo<void> {
+  const AddCategoryRoute({List<_i14.PageRouteInfo>? children})
     : super(AddCategoryRoute.name, initialChildren: children);
 
   static const String name = 'AddCategoryRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       return const _i1.AddCategory();
@@ -56,13 +59,13 @@ class AddCategoryRoute extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AddTags]
-class AddTagsRoute extends _i13.PageRouteInfo<void> {
-  const AddTagsRoute({List<_i13.PageRouteInfo>? children})
+class AddTagsRoute extends _i14.PageRouteInfo<void> {
+  const AddTagsRoute({List<_i14.PageRouteInfo>? children})
     : super(AddTagsRoute.name, initialChildren: children);
 
   static const String name = 'AddTagsRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       return const _i2.AddTags();
@@ -72,13 +75,13 @@ class AddTagsRoute extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Auth]
-class AuthRoute extends _i13.PageRouteInfo<void> {
-  const AuthRoute({List<_i13.PageRouteInfo>? children})
+class AuthRoute extends _i14.PageRouteInfo<void> {
+  const AuthRoute({List<_i14.PageRouteInfo>? children})
     : super(AuthRoute.name, initialChildren: children);
 
   static const String name = 'AuthRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       return const _i3.Auth();
@@ -87,28 +90,65 @@ class AuthRoute extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.General]
-class GeneralRoute extends _i13.PageRouteInfo<void> {
-  const GeneralRoute({List<_i13.PageRouteInfo>? children})
+/// [_i4.Categories]
+class CategoriesRoute extends _i14.PageRouteInfo<CategoriesRouteArgs> {
+  CategoriesRoute({
+    _i15.Key? key,
+    required _i16.NavigateType navigateType,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
+         CategoriesRoute.name,
+         args: CategoriesRouteArgs(key: key, navigateType: navigateType),
+         initialChildren: children,
+       );
+
+  static const String name = 'CategoriesRoute';
+
+  static _i14.PageInfo page = _i14.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CategoriesRouteArgs>();
+      return _i4.Categories(key: args.key, navigateType: args.navigateType);
+    },
+  );
+}
+
+class CategoriesRouteArgs {
+  const CategoriesRouteArgs({this.key, required this.navigateType});
+
+  final _i15.Key? key;
+
+  final _i16.NavigateType navigateType;
+
+  @override
+  String toString() {
+    return 'CategoriesRouteArgs{key: $key, navigateType: $navigateType}';
+  }
+}
+
+/// generated route for
+/// [_i5.General]
+class GeneralRoute extends _i14.PageRouteInfo<void> {
+  const GeneralRoute({List<_i14.PageRouteInfo>? children})
     : super(GeneralRoute.name, initialChildren: children);
 
   static const String name = 'GeneralRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i4.General();
+      return const _i5.General();
     },
   );
 }
 
 /// generated route for
-/// [_i5.HomeDetails]
-class HomeDetailsRoute extends _i13.PageRouteInfo<HomeDetailsRouteArgs> {
+/// [_i6.HomeDetails]
+class HomeDetailsRoute extends _i14.PageRouteInfo<HomeDetailsRouteArgs> {
   HomeDetailsRoute({
-    _i14.Key? key,
-    required _i5.Post latestPosts,
-    List<_i13.PageRouteInfo>? children,
+    _i15.Key? key,
+    required _i6.Post latestPosts,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
          HomeDetailsRoute.name,
          args: HomeDetailsRouteArgs(key: key, latestPosts: latestPosts),
@@ -117,11 +157,11 @@ class HomeDetailsRoute extends _i13.PageRouteInfo<HomeDetailsRouteArgs> {
 
   static const String name = 'HomeDetailsRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<HomeDetailsRouteArgs>();
-      return _i5.HomeDetails(key: args.key, latestPosts: args.latestPosts);
+      return _i6.HomeDetails(key: args.key, latestPosts: args.latestPosts);
     },
   );
 }
@@ -129,9 +169,9 @@ class HomeDetailsRoute extends _i13.PageRouteInfo<HomeDetailsRouteArgs> {
 class HomeDetailsRouteArgs {
   const HomeDetailsRouteArgs({this.key, required this.latestPosts});
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
-  final _i5.Post latestPosts;
+  final _i6.Post latestPosts;
 
   @override
   String toString() {
@@ -140,92 +180,113 @@ class HomeDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i6.Login]
-class LoginRoute extends _i13.PageRouteInfo<void> {
-  const LoginRoute({List<_i13.PageRouteInfo>? children})
+/// [_i7.Login]
+class LoginRoute extends _i14.PageRouteInfo<void> {
+  const LoginRoute({List<_i14.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i6.Login();
+      return const _i7.Login();
     },
   );
 }
 
 /// generated route for
-/// [_i7.OnboardingScreen]
-class OnboardingScreenRoute extends _i13.PageRouteInfo<void> {
-  const OnboardingScreenRoute({List<_i13.PageRouteInfo>? children})
+/// [_i8.OnboardingScreen]
+class OnboardingScreenRoute extends _i14.PageRouteInfo<void> {
+  const OnboardingScreenRoute({List<_i14.PageRouteInfo>? children})
     : super(OnboardingScreenRoute.name, initialChildren: children);
 
   static const String name = 'OnboardingScreenRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i7.OnboardingScreen();
+      return const _i8.OnboardingScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i8.Register]
-class RegisterRoute extends _i13.PageRouteInfo<void> {
-  const RegisterRoute({List<_i13.PageRouteInfo>? children})
+/// [_i9.Register]
+class RegisterRoute extends _i14.PageRouteInfo<void> {
+  const RegisterRoute({List<_i14.PageRouteInfo>? children})
     : super(RegisterRoute.name, initialChildren: children);
 
   static const String name = 'RegisterRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i8.Register();
+      return const _i9.Register();
     },
   );
 }
 
 /// generated route for
-/// [_i9.SplashScreen]
-class SplashScreenRoute extends _i13.PageRouteInfo<void> {
-  const SplashScreenRoute({List<_i13.PageRouteInfo>? children})
+/// [_i10.SplashScreen]
+class SplashScreenRoute extends _i14.PageRouteInfo<void> {
+  const SplashScreenRoute({List<_i14.PageRouteInfo>? children})
     : super(SplashScreenRoute.name, initialChildren: children);
 
   static const String name = 'SplashScreenRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i9.SplashScreen();
+      return const _i10.SplashScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i10.Tags]
-class TagsRoute extends _i13.PageRouteInfo<void> {
-  const TagsRoute({List<_i13.PageRouteInfo>? children})
-    : super(TagsRoute.name, initialChildren: children);
+/// [_i11.Tags]
+class TagsRoute extends _i14.PageRouteInfo<TagsRouteArgs> {
+  TagsRoute({
+    _i15.Key? key,
+    required _i16.NavigateType navigateType,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
+         TagsRoute.name,
+         args: TagsRouteArgs(key: key, navigateType: navigateType),
+         initialChildren: children,
+       );
 
   static const String name = 'TagsRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i10.Tags();
+      final args = data.argsAs<TagsRouteArgs>();
+      return _i11.Tags(key: args.key, navigateType: args.navigateType);
     },
   );
 }
 
+class TagsRouteArgs {
+  const TagsRouteArgs({this.key, required this.navigateType});
+
+  final _i15.Key? key;
+
+  final _i16.NavigateType navigateType;
+
+  @override
+  String toString() {
+    return 'TagsRouteArgs{key: $key, navigateType: $navigateType}';
+  }
+}
+
 /// generated route for
-/// [_i11.UpdateCategory]
-class UpdateCategoryRoute extends _i13.PageRouteInfo<UpdateCategoryRouteArgs> {
+/// [_i12.UpdateCategory]
+class UpdateCategoryRoute extends _i14.PageRouteInfo<UpdateCategoryRouteArgs> {
   UpdateCategoryRoute({
-    required _i15.Category categoriesData,
-    _i14.Key? key,
-    List<_i13.PageRouteInfo>? children,
+    required _i17.Category categoriesData,
+    _i15.Key? key,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
          UpdateCategoryRoute.name,
          args: UpdateCategoryRouteArgs(
@@ -237,11 +298,11 @@ class UpdateCategoryRoute extends _i13.PageRouteInfo<UpdateCategoryRouteArgs> {
 
   static const String name = 'UpdateCategoryRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<UpdateCategoryRouteArgs>();
-      return _i11.UpdateCategory(
+      return _i12.UpdateCategory(
         categoriesData: args.categoriesData,
         key: args.key,
       );
@@ -252,9 +313,9 @@ class UpdateCategoryRoute extends _i13.PageRouteInfo<UpdateCategoryRouteArgs> {
 class UpdateCategoryRouteArgs {
   const UpdateCategoryRouteArgs({required this.categoriesData, this.key});
 
-  final _i15.Category categoriesData;
+  final _i17.Category categoriesData;
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   @override
   String toString() {
@@ -263,12 +324,12 @@ class UpdateCategoryRouteArgs {
 }
 
 /// generated route for
-/// [_i12.UpdateTags]
-class UpdateTagsRoute extends _i13.PageRouteInfo<UpdateTagsRouteArgs> {
+/// [_i13.UpdateTags]
+class UpdateTagsRoute extends _i14.PageRouteInfo<UpdateTagsRouteArgs> {
   UpdateTagsRoute({
-    required _i10.Tag tagsData,
-    _i14.Key? key,
-    List<_i13.PageRouteInfo>? children,
+    required _i11.Tag tagsData,
+    _i15.Key? key,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
          UpdateTagsRoute.name,
          args: UpdateTagsRouteArgs(tagsData: tagsData, key: key),
@@ -277,11 +338,11 @@ class UpdateTagsRoute extends _i13.PageRouteInfo<UpdateTagsRouteArgs> {
 
   static const String name = 'UpdateTagsRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<UpdateTagsRouteArgs>();
-      return _i12.UpdateTags(tagsData: args.tagsData, key: args.key);
+      return _i13.UpdateTags(tagsData: args.tagsData, key: args.key);
     },
   );
 }
@@ -289,9 +350,9 @@ class UpdateTagsRoute extends _i13.PageRouteInfo<UpdateTagsRouteArgs> {
 class UpdateTagsRouteArgs {
   const UpdateTagsRouteArgs({required this.tagsData, this.key});
 
-  final _i10.Tag tagsData;
+  final _i11.Tag tagsData;
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   @override
   String toString() {

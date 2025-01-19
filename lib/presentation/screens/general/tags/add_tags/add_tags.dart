@@ -18,6 +18,12 @@ class _AddTagsState extends State<AddTags> {
   }
 
   @override
+  void dispose() {
+    addTagsViewModel.textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -25,7 +31,9 @@ class _AddTagsState extends State<AddTags> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Add Tags'),
+          title: Text(
+            AppLocalizations.of(context)!.addTags,
+          ),
           leading: AutoLeadingButton(),
         ),
         body: SafeArea(
@@ -38,7 +46,7 @@ class _AddTagsState extends State<AddTags> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Title',
+                  AppLocalizations.of(context)!.title,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -50,7 +58,7 @@ class _AddTagsState extends State<AddTags> {
                 ),
                 20.heightBox,
                 Text(
-                  'Slug',
+                  AppLocalizations.of(context)!.slug,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -66,7 +74,7 @@ class _AddTagsState extends State<AddTags> {
                   builder: (context, state) {
                     return PrimaryButton(
                       isLoading: state.data,
-                      title: 'Add New Tag',
+                      title: AppLocalizations.of(context)!.addNewTag,
                       onPressed: () => addTagsViewModel.addNewTags(context),
                     );
                   },

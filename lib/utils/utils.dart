@@ -8,7 +8,7 @@ class Utils {
     if (token != null) {
       AutoRouter.of(context).replace(const GeneralRoute());
     } else {
-      AutoRouter.of(context).replace(const AuthRoute());
+      AutoRouter.of(context).replace(const OnboardingScreenRoute());
     }
   }
 

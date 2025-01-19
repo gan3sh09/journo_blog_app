@@ -10,6 +10,8 @@ import '/presentation/common_widgets/common_widgets_imports.dart';
 import '/core/constants/app_assets.dart';
 import '/core/constants/app_colors.dart';
 import '/core/constants/size_config.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 part 'register.dart';
 part 'register_model.dart';

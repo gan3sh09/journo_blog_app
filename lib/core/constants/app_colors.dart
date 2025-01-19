@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_flavor/flutter_flavor.dart';
 
 class AppColors {
   AppColors._();
   // static const Color primaryColor = Color(0XFFE85520);
-  static const Color primaryColor = Colors.teal;
+  static final Color primaryColor = FlavorConfig.instance.variables['primaryColor'];
 
   static const Color secondaryColor = Colors.green;
   static const Color whiteColor = Colors.white;

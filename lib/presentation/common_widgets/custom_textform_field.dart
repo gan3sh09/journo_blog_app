@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? labelText;
   final bool? obscureText;
   final Color? fillColor;
+  final AutovalidateMode? autovalidateMode;
   const CustomTextFormField({
     super.key,
     this.keyboardType,
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.labelText,
     this.obscureText,
     this.fillColor,
+    this.autovalidateMode,
   });
 
   @override
@@ -42,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
       cursorColor: AppColors.primaryColor,
       onChanged: onChanged,
       controller: controller,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
       keyboardType: keyboardType,
       validator: validator,
       readOnly: readOnly ?? false,

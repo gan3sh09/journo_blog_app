@@ -9,6 +9,8 @@ import 'package:journo_blog_app/presentation/common_widgets/common_widgets_impor
 import 'package:velocity_bloc/velocity_bloc.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../tags_imports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 part 'update_tags.dart';
 part 'update_tags_model.dart';

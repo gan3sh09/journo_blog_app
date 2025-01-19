@@ -14,6 +14,8 @@ import 'package:journo_blog_app/presentation/router/router_imports.gr.dart';
 import 'package:journo_blog_app/utils/utils.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:velocity_bloc/cubit/velocity_cubit/velocity_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import '../../../shimmer_effects/profile_shimmer.dart';
 part 'profile.dart';

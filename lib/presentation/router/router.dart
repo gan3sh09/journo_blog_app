@@ -9,14 +9,12 @@ class AppRouter extends RootStackRouter {
   List<CustomRoute> get routes => [
         CustomRoute(
           page: SplashScreenRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
           path: "/",
           initial: true,
         ),
         CustomRoute(
           page: OnboardingScreenRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
@@ -36,12 +34,10 @@ class AppRouter extends RootStackRouter {
         ),
         CustomRoute(
           page: GeneralRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
           page: HomeDetailsRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
         CustomRoute(
@@ -62,6 +58,14 @@ class AppRouter extends RootStackRouter {
         CustomRoute(
           page: UpdateCategoryRoute.page,
           transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: TagsRoute.page,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: CategoriesRoute.page,
           durationInMilliseconds: 400,
         ),
       ];

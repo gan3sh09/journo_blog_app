@@ -2,7 +2,8 @@ part of 'tags_imports.dart';
 
 @RoutePage()
 class Tags extends StatefulWidget {
-  const Tags({super.key});
+  final NavigateType navigateType;
+  const Tags({super.key, required this.navigateType});
 
   @override
   State<Tags> createState() => _TagsState();
@@ -26,16 +27,20 @@ class _TagsState extends State<Tags> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Tags'),
+          automaticallyImplyLeading:
+              NavigateType.outer == widget.navigateType ? true : false,
+          title: Text(
+            AppLocalizations.of(context)!.tags,
+          ),
+          leading: AutoLeadingButton(),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 20.w),
+              padding: EdgeInsets.only(right: 40.w),
               child: IconButton(
                 onPressed: () => tagsViewModel.gotoAddTags(context),
                 icon: Badge(
                   label: Text(
-                    'Add',
+                    AppLocalizations.of(context)!.add,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                   child: Icon(
@@ -68,9 +73,29 @@ class _TagsState extends State<Tags> {
                         "${index + 1}",
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      title: Text(
-                        tagsData.title ?? "No Title",
-                        style: Theme.of(context).textTheme.labelLarge,
+                      title: GestureDetector(
+                        onTap: () {
+                          NavigateType.outer == widget.navigateType
+                              ? null
+                              : AutoRouter.of(context).maybePop<Tag>(tagsData);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10.r),
+                          decoration: BoxDecoration(
+                            color: AppColors.scafLightBackground,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Text(
+                            tagsData.title ?? "No Title",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -97,10 +122,11 @@ class _TagsState extends State<Tags> {
                                 context: context,
                                 barrierDismissible: true,
                                 builder: (_) => CustomDialog(
-                                  title: 'Confirm Delete',
-                                  subTitle:
-                                      'Are you sure you want to delete this tag?',
-                                  buttonText: 'Delete',
+                                  title: AppLocalizations.of(context)!
+                                      .confirmDelete,
+                                  subTitle: AppLocalizations.of(context)!
+                                      .deleteTagText,
+                                  buttonText: AppLocalizations.of(context)!.yes,
                                   icon: HugeIcons.strokeRoundedAlertCircle,
                                   onConfirm: () {
                                     tagsViewModel.deleteTags(

@@ -47,7 +47,7 @@ class TextThemes {
       color: AppColors.textColor,
     ),
     labelMedium: TextStyle(
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.textColor,
       fontWeight: FontWeight.bold,
     ),
@@ -121,7 +121,7 @@ class TextThemes {
       color: AppColors.textColor,
     ),
     labelMedium: TextStyle(
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       color: AppColors.textColor,
       fontWeight: FontWeight.bold,
     ),

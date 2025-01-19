@@ -22,6 +22,12 @@ class _UpdateTagsState extends State<UpdateTags> {
   }
 
   @override
+  void dispose() {
+    updateTagsViewModel.textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -29,7 +35,9 @@ class _UpdateTagsState extends State<UpdateTags> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Update Tags'),
+          title: Text(
+            AppLocalizations.of(context)!.updateTag,
+          ),
           leading: AutoLeadingButton(),
         ),
         body: SafeArea(
@@ -42,7 +50,7 @@ class _UpdateTagsState extends State<UpdateTags> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Title',
+                  AppLocalizations.of(context)!.title,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -54,7 +62,7 @@ class _UpdateTagsState extends State<UpdateTags> {
                 ),
                 20.heightBox,
                 Text(
-                  'Slug',
+                  AppLocalizations.of(context)!.slug,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 5.heightBox,
@@ -70,7 +78,7 @@ class _UpdateTagsState extends State<UpdateTags> {
                   builder: (context, state) {
                     return PrimaryButton(
                       isLoading: state.data,
-                      title: 'Update Tag',
+                      title: AppLocalizations.of(context)!.updateTag,
                       onPressed: () => updateTagsViewModel.updateTags(
                         context,
                         widget.tagsData.id.toString(),

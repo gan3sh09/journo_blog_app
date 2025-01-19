@@ -9,55 +9,70 @@ class General extends StatefulWidget {
 }
 
 class _GeneralState extends State<General> {
-  List<TabItem> items = [
-    TabItem(
-      icon: HugeIcons.strokeRoundedHome01,
-      title: 'Home',
-    ),
-    TabItem(
-      icon: HugeIcons.strokeRoundedDashboardSquareAdd,
-      title: 'Category',
-    ),
-    TabItem(
-      icon: HugeIcons.strokeRoundedAdd01,
-      title: 'Wishlist',
-    ),
-    TabItem(
-      icon: HugeIcons.strokeRoundedTags,
-      title: 'Tags',
-    ),
-    TabItem(
-      icon: HugeIcons.strokeRoundedUserCheck01,
-      title: 'profile',
-    ),
-  ];
   int visit = 0;
 
   List<Widget> pages = [
     Home(),
-    Categories(),
+    Categories(
+      navigateType: NavigateType.outer,
+    ),
     AddPosts(),
-    Tags(),
+    Tags(
+      navigateType: NavigateType.outer,
+    ),
     Profile(),
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: visit,
-        children: pages,
+    List<TabItem> items = [
+      TabItem(
+        icon: HugeIcons.strokeRoundedHome01,
+        title: AppLocalizations.of(context)!.dashboard,
       ),
-      bottomNavigationBar: BottomBarCreative(
-        items: items,
-        backgroundColor: AppColors.scafLightBackground,
-        titleStyle: Theme.of(context).textTheme.bodySmall,
-        color: AppColors.textColor,
-        colorSelected: AppColors.primaryColor,
-        indexSelected: visit,
-        onTap: (int index) => setState(() {
-          visit = index;
-          debugPrint(visit.toString());
-        }),
+      TabItem(
+        icon: HugeIcons.strokeRoundedDashboardSquareAdd,
+        title: AppLocalizations.of(context)!.category,
+      ),
+      TabItem(
+        icon: HugeIcons.strokeRoundedAdd01,
+      ),
+      TabItem(
+        icon: HugeIcons.strokeRoundedTags,
+        title: AppLocalizations.of(context)!.tags,
+      ),
+      TabItem(
+        icon: HugeIcons.strokeRoundedUserCheck01,
+        title: AppLocalizations.of(context)!.profile,
+      ),
+    ];
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) {
+          return;
+        }
+        final bool shouldPop = await showExitDialog(context) ?? false;
+        if (context.mounted && shouldPop) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: visit,
+          children: pages,
+        ),
+        bottomNavigationBar: BottomBarCreative(
+          items: items,
+          backgroundColor: AppColors.scafLightBackground,
+          titleStyle: Theme.of(context).textTheme.bodySmall,
+          color: AppColors.textColor,
+          colorSelected: AppColors.primaryColor,
+          indexSelected: visit,
+          onTap: (int index) => setState(() {
+            visit = index;
+            debugPrint(visit.toString());
+          }),
+        ),
       ),
     );
   }

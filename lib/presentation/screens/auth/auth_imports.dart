@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/presentation/common_widgets/common_widgets_imports.dart';
 import '/core/constants/app_assets.dart';
 import '../../router/router_imports.gr.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 part 'auth.dart';
 part 'auth_view_model.dart';

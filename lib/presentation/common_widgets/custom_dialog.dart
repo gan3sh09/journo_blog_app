@@ -36,20 +36,17 @@ class CustomDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              // HugeIcons.strokeRoundedLogout03,
               icon,
               size: 50,
               color: Colors.red,
             ),
             const SizedBox(height: 10),
             Text(
-              // 'Confirm Logout',
               title,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 10),
             Text(
-              // 'Are you sure you want to log out?',
               subTitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.labelLarge,
@@ -60,7 +57,7 @@ class CustomDialog extends StatelessWidget {
                 Expanded(
                   child: OutlineButton(
                     onPressed: onCancel,
-                    text: 'Cancel',
+                    text: AppLocalizations.of(context)!.cancel,
                   ),
                 ),
                 12.widthBox,

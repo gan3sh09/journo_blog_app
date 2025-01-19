@@ -13,9 +13,14 @@ class ProfileViewModel {
   final VelocityBloc<ProfileModel> profileModelBloc =
       VelocityBloc<ProfileModel>(ProfileModel());
 
-  getUserProfileData() async {
+  getUserProfileData(BuildContext context) async {
     var userProfileData = await repository.postsRepo.getUserPosts();
     if (userProfileData.status == 1) {
+      if (context.mounted) {
+        context
+            .read<VelocityBloc<ProfileModel>>()
+            .onUpdateData(userProfileData);
+      }
       profileModelBloc.onUpdateData(userProfileData);
     }
   }
@@ -29,7 +34,8 @@ class ProfileViewModel {
         context,
         snackBarType: SnackBarType.alert,
         // label: data.message.toString(),
-        label: 'You have successfully Logged out.',
+        label: AppLocalizations.of(context)!.youHaveSuccessfullyLoggedOut,
+
         labelTextStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
