@@ -7,16 +7,17 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final void Function()? onTap;
   final Function(String)? onChanged;
-  final bool? readOnly;
+  final bool readOnly;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final int? maxLength;
   final String? counterText;
   final FocusNode? focusNode;
   final String? labelText;
-  final bool? obscureText;
+  final bool obscureText;
   final Color? fillColor;
   final AutovalidateMode? autovalidateMode;
+
   const CustomTextFormField({
     super.key,
     this.keyboardType,
@@ -24,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.suffixIcon,
-    this.readOnly,
+    this.readOnly = false,
     this.onTap,
     this.validator,
     this.maxLength,
@@ -32,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     this.counterText,
     this.focusNode,
     this.labelText,
-    this.obscureText,
+    this.obscureText = false,
     this.fillColor,
     this.autovalidateMode,
   });
@@ -40,16 +41,14 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: obscureText ?? false,
+      obscureText: obscureText,
       cursorColor: AppColors.primaryColor,
       onChanged: onChanged,
       controller: controller,
       autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
       keyboardType: keyboardType,
       validator: validator,
-      readOnly: readOnly ?? false,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      onTap: onTap,
+      readOnly: readOnly,
       maxLength: maxLength,
       focusNode: focusNode,
       style: Theme.of(context).textTheme.labelLarge,
@@ -63,31 +62,39 @@ class CustomTextFormField extends StatelessWidget {
         ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(7),
-          borderSide: const BorderSide(
-            width: 1,
-            color: Colors.redAccent,
-          ),
-        ),
+        border: _buildBorder(),
+        enabledBorder: _buildBorder(),
+        focusedBorder: _buildBorder(),
+        errorBorder: _buildErrorBorder(),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
           vertical: 13,
         ),
         fillColor: fillColor ?? AppColors.textFormFieldColor,
         filled: true,
+      ),
+      onFieldSubmitted: (value) {
+        FocusScope.of(context).nextFocus();
+      },
+      onEditingComplete: () {
+        FocusScope.of(context).unfocus();
+      },
+    );
+  }
+
+  OutlineInputBorder _buildBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide.none,
+    );
+  }
+
+  OutlineInputBorder _buildErrorBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(7),
+      borderSide: const BorderSide(
+        width: 1,
+        color: Colors.redAccent,
       ),
     );
   }

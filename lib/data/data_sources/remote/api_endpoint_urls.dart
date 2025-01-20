@@ -1,6 +1,7 @@
 class ApiEndpointUrls {
   ApiEndpointUrls._();
   // Auth Endpoint URLS
+  static const String register = 'register';
   static const String login = 'login';
   static const String logout = 'logout';
 
@@ -14,6 +15,8 @@ class ApiEndpointUrls {
   static const String posts = 'posts';
   static const String userPosts = 'user-posts';
   static const String addPosts = 'add-posts';
+  static const String updatePosts = 'update-posts';
+  static const String deletePosts = 'delete-posts';
 
   // Category Endpoint URLS
   static const String categories = 'categories';

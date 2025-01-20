@@ -66,17 +66,22 @@
     "pleaseEnterValidEmail": "Please enter valid email",
     "pleaseEnterYourPassword": "Please enter your password",
     "passwordMustBeAtLeastSixCharacter": "Password must be at least 6 characters long",
-    "passwordDOnotMatch": "The passwords didn't match.",
-    "language" : "Language"
-    
-
-
-
-    
-
-
-    
-
-
-    
+    "passwordDidnotMatch": "The passwords didn't match.",
+    "language" : "Language",
+    "fullName" :"Full Name",
+    "pleaseEnterYourFullName" : "Please enter your full name",
+    "pleaseEnterValidName" : "Please enter valid name",
+    "youHaveBeenRegisteredSuccessfully" : "You have been registered successfully",
+    "theEmailHasAlreadyTaken" : "The email has already taken",
+    "unauthorized" : "Unauthorized",
+    "somethingWentWrong" : "Something went wrong",
+    "updatePost" : "Update Post",
+    "postUpdatedSuccessfully":"Post Updated Successfully.",
+    "tagsCannotBeEmpty":"Tags can't be empty.",
+    "categoryCannotBeEmpty":"Category can't be empty.",
+    "postDeletedSuccessfully":"Post deleted successfully.",
+    "imageCannotBeEmpty": "Image con't be empty.",
+    "deletePost": "Delete Post",
+    "areYouSureYouWantToDeleteThePost": "Are you sure you want to delete the post?",
+    "noImageSelected":"No Image Selected"    
 }

@@ -68,5 +68,13 @@ class AppRouter extends RootStackRouter {
           page: CategoriesRoute.page,
           durationInMilliseconds: 400,
         ),
+        CustomRoute(
+          page: ProfileRoute.page,
+          durationInMilliseconds: 400,
+        ),
+        CustomRoute(
+          page: UpdateMypostRoute.page,
+          durationInMilliseconds: 400,
+        ),
       ];
 }

@@ -65,9 +65,22 @@
     "pleaseEnterValidEmail": "कृपया मान्य इमेल प्रविष्ट गर्नुहोस्",
     "pleaseEnterYourPassword": "कृपया आफ्नो पासवर्ड प्रविष्ट गर्नुहोस्",
     "passwordMustBeAtLeastSixCharacter": "पासवर्ड कम्तिमा 6 वर्ण लामो हुनुपर्छ",
-    "passwordDOnotMatch": "पासवर्डहरू मेल खाएनन्।",
-    "language" : "भाषा"
-
-    
-
+    "passwordDidnotMatch": "पासवर्डहरू मेल खाएनन्।",
+    "language" : "भाषा",
+    "fullName" :"पूरा नाम",
+    "pleaseEnterYourFullName" : "कृपया आफ्नो पूरा नाम प्रविष्ट गर्नुहोस्",
+    "pleaseEnterValidName" : "कृपया मान्य नाम प्रविष्ट गर्नुहोस्",
+    "youHaveBeenRegisteredSuccessfully" : "तपाईं सफलतापूर्वक दर्ता भएको छ",
+    "theEmailHasAlreadyTaken" : "इमेल पहिले नै लिइसकेको छ",
+    "unauthorized" : "अनाधिकृत",
+    "somethingWentWrong" : "केही गडबड भयो",
+    "updatePost" : "पोस्ट अद्यावधिक गर्नुहोस्",
+    "postUpdatedSuccessfully":"सफलतापूर्वक अद्यावधिक गरिएको पोस्ट।",
+    "tagsCannotBeEmpty":"ट्यागहरू खाली हुन सक्दैनन्।",
+    "categoryCannotBeEmpty":"श्रेणी खाली हुन सक्दैन।",
+    "postDeletedSuccessfully":"पोस्ट सफलतापूर्वक मेटियो।",
+    "imageCannotBeEmpty": "छवि खाली हुने छैन।",
+     "deletePost": "पोस्ट मेट्नुहोस्",
+    "areYouSureYouWantToDeleteThePost": "के तपाईँ निश्चित रूपमा पोस्ट मेट्न चाहनुहुन्छ?",
+    "noImageSelected":"छवि चयन गरिएको छैन।"
 }

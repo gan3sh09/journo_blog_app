@@ -45,34 +45,22 @@ class _GeneralState extends State<General> {
         title: AppLocalizations.of(context)!.profile,
       ),
     ];
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (bool didPop) async {
-        if (didPop) {
-          return;
-        }
-        final bool shouldPop = await showExitDialog(context) ?? false;
-        if (context.mounted && shouldPop) {
-          Navigator.pop(context);
-        }
-      },
-      child: Scaffold(
-        body: IndexedStack(
-          index: visit,
-          children: pages,
-        ),
-        bottomNavigationBar: BottomBarCreative(
-          items: items,
-          backgroundColor: AppColors.scafLightBackground,
-          titleStyle: Theme.of(context).textTheme.bodySmall,
-          color: AppColors.textColor,
-          colorSelected: AppColors.primaryColor,
-          indexSelected: visit,
-          onTap: (int index) => setState(() {
-            visit = index;
-            debugPrint(visit.toString());
-          }),
-        ),
+    return Scaffold(
+      body: IndexedStack(
+        index: visit,
+        children: pages,
+      ),
+      bottomNavigationBar: BottomBarCreative(
+        items: items,
+        backgroundColor: AppColors.scafLightBackground,
+        titleStyle: Theme.of(context).textTheme.bodySmall,
+        color: AppColors.textColor,
+        colorSelected: AppColors.primaryColor,
+        indexSelected: visit,
+        onTap: (int index) => setState(() {
+          visit = index;
+          debugPrint(visit.toString());
+        }),
       ),
     );
   }

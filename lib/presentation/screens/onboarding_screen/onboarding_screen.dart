@@ -134,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   PrimaryButton(
                     title: AppLocalizations.of(context)!.getStarted,
                     onPressed: () =>
-                        AutoRouter.of(context).replace(const AuthRoute()),
+                        AutoRouter.of(context).push(const AuthRoute()),
                     /* onPressed: () async {
                       final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
@@ -148,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       GestureDetector(
                         onTap: () =>
-                            AutoRouter.of(context).replace(const AuthRoute()),
+                            AutoRouter.of(context).push(const AuthRoute()),
                         child: Text(
                           AppLocalizations.of(context)!.skip,
                           style: Theme.of(context).textTheme.titleSmall,

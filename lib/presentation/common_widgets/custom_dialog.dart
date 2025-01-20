@@ -49,7 +49,10 @@ class CustomDialog extends StatelessWidget {
             Text(
               subTitle,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14.sp,
+                  ),
             ),
             const SizedBox(height: 20),
             Row(

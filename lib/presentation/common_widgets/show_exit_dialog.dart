@@ -5,9 +5,9 @@ Future<bool?> showExitDialog(BuildContext context) async {
     context: context,
     barrierDismissible: true,
     builder: (_) => CustomDialog(
-      title: 'Confirm Exit',
-      subTitle: 'Are you sure you want to exit app?',
-      buttonText: 'Exit',
+      title: AppLocalizations.of(context)!.confirmExit,
+      subTitle: AppLocalizations.of(context)!.confirmExitText,
+      buttonText: AppLocalizations.of(context)!.yes,
       icon: HugeIcons.strokeRoundedLogout05,
       onConfirm: () {
         exit(0);

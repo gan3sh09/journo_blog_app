@@ -17,6 +17,7 @@ import 'package:velocity_bloc/cubit/velocity_cubit/velocity_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
+import '../../../common_widgets/date_converter.dart';
 import '../../../shimmer_effects/profile_shimmer.dart';
 part 'profile.dart';
 part 'profile_model.dart';

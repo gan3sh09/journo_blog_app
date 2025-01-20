@@ -42,6 +42,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
+                        // Heading
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 12.w, vertical: 2.h),
@@ -85,27 +86,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           color: Colors.grey.shade200,
                         ),
                         15.heightBox,
-                        /* SizedBox(
-                          height: 200.h,
-                          child: PageView.builder(
-                            controller: homeViewModel.pageController,
-                            itemCount: state.data.popularPosts!.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    EdgeInsets.only(left: 12.w, right: 12.w),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.r),
-                                  child: CustomCachedImage(
-                                    photoUrl: state
-                                        .data.allPosts![index].featuredimage
-                                        .toString(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ), */
+                        // Advertisement
                         SizedBox(
                           height: 200.h,
                           child: CarouselSlider.builder(
@@ -136,20 +117,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        /*  10.heightBox,
-                        SmoothPageIndicator(
-                          controller: homeViewModel.pageController,
-                          count: state.data.popularPosts!.length,
-                          effect: SwapEffect(
-                            activeDotColor: AppColors.primaryColor,
-                            dotHeight: 10,
-                            dotWidth: 10,
-                          ),
-                          onDotClicked: (index) {
-                             homeViewModel.carouselSliderController.animateToPage(index);
-                          },
-                        ), */
                         20.heightBox,
+                        // Body
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
                           child: Row(
@@ -167,6 +136,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           ),
                         ),
                         10.heightBox,
+                        // Latest Posts
                         ListView.separated(
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
                           shrinkWrap: true,
@@ -227,6 +197,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             DateConverter(
                                               dateTime: latestPosts.createdAt
                                                   .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge,
                                             ),
                                           ],
                                         ),

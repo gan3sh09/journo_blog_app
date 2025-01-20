@@ -22,7 +22,6 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../enums/navigate_type.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 part 'add_posts.dart';
 part 'add_post_model.dart';
 part 'add_post_view_model.dart';

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class DateConverter extends StatelessWidget {
   final String dateTime;
+  final TextStyle? style;
 
-  const DateConverter({required this.dateTime, super.key});
+  const DateConverter({required this.dateTime, required this.style, super.key});
 
   String getRelativeTime() {
     final now = DateTime.now();
@@ -31,7 +32,7 @@ class DateConverter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       getRelativeTime(),
-      style: Theme.of(context).textTheme.labelLarge,
+      style: style,
     );
   }
 }

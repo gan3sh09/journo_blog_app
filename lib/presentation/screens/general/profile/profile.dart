@@ -1,5 +1,6 @@
 part of 'profile_imports.dart';
 
+@RoutePage()
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -184,7 +185,11 @@ class _ProfileState extends State<Profile> {
                       ),
                       20.heightBox,
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        padding: EdgeInsets.only(
+                          left: 20.w,
+                          right: 20.w,
+                          bottom: 20.h,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -201,7 +206,7 @@ class _ProfileState extends State<Profile> {
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 15.w,
-                                  mainAxisSpacing: 15.h,
+                                  mainAxisSpacing: 18.h,
                                   childAspectRatio: 0.99,
                                 ),
                                 itemBuilder: (context, index) {
@@ -210,42 +215,58 @@ class _ProfileState extends State<Profile> {
                                   final imagePath =
                                       'https://techblog.codersangam.com/${userPostsData.featuredimage.toString().replaceAll('public', 'storage')}';
                                   return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.r),
-                                          child: CustomCachedImage(
-                                            photoUrl: imagePath.toString(),
+                                          child: GestureDetector(
+                                            onTap: () =>
+                                                AutoRouter.of(context).push(
+                                              UpdateMypostRoute(
+                                                userData: userData,
+                                                userPostsData: userPostsData,
+                                                index: index,
+                                              ),
+                                            ),
+                                            child: CustomCachedImage(
+                                              photoUrl: imagePath.toString(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      3.heightBox,
+                                      1.heightBox,
+                                      Text(
+                                        userPostsData.title.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      1.heightBox,
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        // mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          SizedBox(
-                                            width:
-                                                SizeConfig.screenWidth * 0.35,
-                                            child: Text(
-                                              userPostsData.title.toString(),
+                                          Icon(
+                                            HugeIcons.strokeRoundedTimer01,
+                                            size: 16,
+                                            color: AppColors.greyColor,
+                                          ),
+                                          3.widthBox,
+                                          /* Text(
+                                              latestPosts.createdAt.toString(),
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodySmall,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {},
-                                            child: Icon(
-                                              HugeIcons
-                                                  .strokeRoundedMoreVertical,
-                                            ),
+                                                  .labelLarge,
+                                            ), */
+                                          DateConverter(
+                                            dateTime: userPostsData.createdAt
+                                                .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
                                           ),
                                         ],
                                       ),

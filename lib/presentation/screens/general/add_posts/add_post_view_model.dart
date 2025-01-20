@@ -9,6 +9,8 @@ class AddPostViewModel {
   final formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
 
+   final FocusNode focusNode = FocusNode();
+
   final TextEditingController textEditingController = TextEditingController();
 
   final VelocityBloc<XFile?> selectedImageBloc = VelocityBloc<XFile?>(null);

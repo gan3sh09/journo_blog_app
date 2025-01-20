@@ -88,4 +88,68 @@ class PostsRepo extends ApiClient {
     }
     return LogoutModel();
   }
+
+  Future<LogoutModel> updatePosts(
+    String title,
+    String slug,
+    String categories,
+    String tags,
+    String body,
+    String userId,
+    String filePath,
+    String filename,
+    String postId,
+  ) async {
+    final formData = FormData.fromMap({
+      'title': title,
+      'slug': slug,
+      'categories': categories,
+      'tags': tags,
+      'body': body,
+      'status': '1',
+      'user_id': userId,
+      'featuredimage':
+          await MultipartFile.fromFile(filePath, filename: filename),
+      'id': postId,
+    });
+    try {
+      final response = await postRequest(
+        path: ApiEndpointUrls.updatePosts,
+        body: formData,
+        isTokenRequired: true,
+      );
+      if (response.statusCode == 200) {
+        final responseData = logoutModelFromJson(jsonEncode(response.data));
+
+        return responseData;
+      } else {
+        LogoutModel();
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      LogoutModel();
+    }
+    return LogoutModel();
+  }
+
+  Future<LogoutModel> deletePosts(String id) async {
+    try {
+      final response = await postRequest(
+        path: '${ApiEndpointUrls.deletePosts}/$id',
+        isTokenRequired: true,
+      );
+      if (response.statusCode == 200) {
+        final responseData = logoutModelFromJson(jsonEncode(response.data));
+        log(responseData.toString());
+
+        return responseData;
+      } else {
+        LogoutModel();
+      }
+    } on Exception catch (e) {
+      log(e.toString());
+      LogoutModel();
+    }
+    return LogoutModel();
+  }
 }

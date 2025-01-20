@@ -44,4 +44,8 @@ class ProfileViewModel {
       );
     }
   }
+
+  goToUpdatePost(context) async {
+
+  }
 }
